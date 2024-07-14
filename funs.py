@@ -14,10 +14,10 @@ def convert_hc_to_list(hc: str) -> list:
         if x[-1] == "m":
             for y in x[:-1]:
                 hc_list[int(y) - 1] += 1
-        if x[-1] == "s":
+        if x[-1] == "p":
             for y in x[:-1]:
                 hc_list[int(y) - 1 + 9] += 1
-        if x[-1] == "p":
+        if x[-1] == "s":
             for y in x[:-1]:
                 hc_list[int(y) - 1 + 18] += 1
         if x[-1] == "z":
@@ -67,6 +67,19 @@ def trimed_mentsu(hc_list, m_list):
             hc_list[index + 2] -= 1
         elif mentsu[2] > 0:
             hc_list[index] -= 3
+    return hc_list
+
+# 從手牌中加上面子牌
+def add_mentsu(hc_list, m_list):
+    hc_list = hc_list.copy()
+    for mentsu in m_list:
+        index = mentsu[0]
+        if mentsu[1] > 0:
+            hc_list[index] += 1
+            hc_list[index + 1] += 1
+            hc_list[index + 2] += 1
+        elif mentsu[2] > 0:
+            hc_list[index] += 3
     return hc_list
 
 # 從手牌中減去塔子牌
